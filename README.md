@@ -1,6 +1,6 @@
-# Samtools
+# BCFTools
 
-This is a singularity image to deploy samtools.
+This is a singularity image to deploy bcftools.
 
 This will produce a Singularity image (suitable for running in a cluster environment) using [https://hub.docker.com/r/broadinstitute/picard/](https://hub.docker.com/r/broadinstitute/picard/). We do this by way of a bootstrap file for the Docker image.
 
@@ -13,59 +13,51 @@ Instructions can be found on the [singularity site](https://singularityware.gith
 ## 2. Bootstrap the image
 
 
-    sudo singularity create --size 4000 samtools.img
-    sudo singularity bootstrap samtools.img Singularity
+    sudo singularity create --size 4000 bcftools.img
+    sudo singularity bootstrap bcftools.img Singularity
 
 
 ## 3. Run commands
 
-How to access the samtools runtime executable?
+How to access the bcftools runtime executable?
 
 
-       ./samtools.img
+       ./bcftools.img
 
-	Program: samtools (Tools for alignments in the SAM format)
+	Program: bcftools (Tools for variant calling and manipulating VCFs and BCFs)
 	Version: 1.3.1 (using htslib 1.3.1)
 
-	Usage:   samtools <command> [options]
+	Usage:   bcftools [--version|--version-only] [--help] <command> <argument>
 
 	Commands:
-	  -- Indexing
-	     dict           create a sequence dictionary file
-	     faidx          index/extract FASTA
-	     index          index alignment
 
-	  -- Editing
-	     calmd          recalculate MD/NM tags and '=' bases
-	     fixmate        fix mate information
-	     reheader       replace BAM header
-	     rmdup          remove PCR duplicates
-	     targetcut      cut fosmid regions (for fosmid pool only)
-	     addreplacerg   adds or replaces RG tags
+	 -- Indexing
+	    index        index VCF/BCF files
 
-	  -- File operations
-	     collate        shuffle and group alignments by name
-	     cat            concatenate BAMs
-	     merge          merge sorted alignments
-	     mpileup        multi-way pileup
-	     sort           sort alignment file
-	     split          splits a file by read group
-	     quickcheck     quickly check if SAM/BAM/CRAM file appears intact
-	     fastq          converts a BAM to a FASTQ
-	     fasta          converts a BAM to a FASTA
+	 -- VCF/BCF manipulation
+	    annotate     annotate and edit VCF/BCF files
+	    concat       concatenate VCF/BCF files from the same set of samples
+	    convert      convert VCF/BCF files to different formats and back
+	    isec         intersections of VCF/BCF files
+	    merge        merge VCF/BCF files files from non-overlapping sample sets
+	    norm         left-align and normalize indels
+	    plugin       user-defined plugins
+	    query        transform VCF/BCF into user-defined formats
+	    reheader     modify VCF/BCF header, change sample names
+	    view         VCF/BCF conversion, view, subset and filter VCF/BCF files
 
-	  -- Statistics
-	     bedcov         read depth per BED region
-	     depth          compute the depth
-	     flagstat       simple stats
-	     idxstats       BAM index stats
-	     phase          phase heterozygotes
-	     stats          generate stats (former bamcheck)
+	 -- VCF/BCF analysis
+	    call         SNP/indel calling
+	    consensus    create consensus sequence by applying VCF variants
+	    cnv          HMM CNV calling
+	    filter       filter VCF/BCF files using fixed thresholds
+	    gtcheck      check sample concordance, detect sample swaps and contamination
+	    roh          identify runs of autozygosity (HMM)
+	    stats        produce VCF/BCF stats
 
-	  -- Viewing
-	     flags          explain BAM flags
-	     tview          text alignment viewer
-	     view           SAM<->BAM<->CRAM conversion
-	     depad          convert padded BAM to unpadded BAM
+	 Most commands accept VCF, bgzipped VCF, and BCF with the file type detected
+	 automatically even when streaming from a pipe. Indexed VCF and BCF will work
+	 in all situations. Un-indexed VCF and BCF and streams will work in most but
+	 not all situations.
 
 

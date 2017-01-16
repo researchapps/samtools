@@ -1,5 +1,5 @@
-Bootstrap:docker
-From:biocontainers/samtools
+Bootstrap: docker
+From: biocontainers/samtools
 
 %runscript
 
